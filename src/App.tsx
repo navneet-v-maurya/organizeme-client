@@ -27,6 +27,10 @@ const App = () => {
     <Suspense fallback={<CircularLoading />}>
       <Routes>
         <Route
+          path="/"
+          element={!user ? <Navigate to="/auth" /> : <Navigate to="/home" />}
+        />
+        <Route
           path="/auth"
           element={
             !user ? (

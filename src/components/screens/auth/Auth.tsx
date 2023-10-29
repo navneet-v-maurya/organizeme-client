@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import "./Auth.css";
 
 interface UserData {
   name: string;
@@ -71,70 +72,64 @@ const Auth: React.FC<MyProps> = (props) => {
     }
   };
 
+  const handleReset = () => {
+    setUserData({ name: "", email: "", password: "", confirmPassword: "" });
+  };
+
   return (
-    <div>
-      <form onSubmit={handleFormSubmit}>
-        {!isLogin && (
-          <div>
-            <label>
-              Name:
-              <input
-                type="text"
-                value={userData.name}
-                onChange={(e) =>
-                  setUserData({ ...userData, name: e.target.value })
-                }
-              />
-            </label>
-            <br />
-          </div>
-        )}
+    <div className="vertical-container auth">
+      {!isLogin && (
+        <input
+          className="input"
+          placeholder="Name"
+          type="text"
+          value={userData.name}
+          onChange={(e) => setUserData({ ...userData, name: e.target.value })}
+        />
+      )}
 
-        <label>
-          Email:
-          <input
-            type="email"
-            value={userData.email}
-            onChange={(e) =>
-              setUserData({ ...userData, email: e.target.value })
-            }
-          />
-        </label>
-        <br />
-        <label>
-          Password:
-          <input
-            type="password"
-            value={userData.password}
-            onChange={(e) =>
-              setUserData({ ...userData, password: e.target.value })
-            }
-          />
-        </label>
-        <br />
+      <input
+        className="input"
+        placeholder="Email"
+        type="email"
+        value={userData.email}
+        onChange={(e) => setUserData({ ...userData, email: e.target.value })}
+      />
 
-        {!isLogin && (
-          <div>
-            <label>
-              Confirm Password:
-              <input
-                type="password"
-                value={userData.confirmPassword}
-                onChange={(e) =>
-                  setUserData({ ...userData, confirmPassword: e.target.value })
-                }
-              />
-            </label>
-            <br />
-          </div>
-        )}
+      <input
+        className="input"
+        placeholder="Password"
+        type="password"
+        value={userData.password}
+        onChange={(e) => setUserData({ ...userData, password: e.target.value })}
+      />
 
-        <button type="submit">{isLogin ? "Login" : "Register"}</button>
-      </form>
+      {!isLogin && (
+        <input
+          className="input"
+          placeholder="Confirm Password"
+          type="password"
+          value={userData.confirmPassword}
+          onChange={(e) =>
+            setUserData({ ...userData, confirmPassword: e.target.value })
+          }
+        />
+      )}
 
-      <button onClick={() => setIsLogin(!isLogin)}>
-        Switch to {isLogin ? "Register" : "Login"}
-      </button>
+      <div className="horizontal-container" style={{ padding: 0 }}>
+        <button className="button auth-button" onClick={handleFormSubmit}>
+          {isLogin ? "Login" : "Register"}
+        </button>
+        <button className="button  auth-button" onClick={handleReset}>
+          Reset
+        </button>
+      </div>
+
+      <p className="auth-p" onClick={() => setIsLogin(!isLogin)}>
+        {isLogin
+          ? "Don't have an Account, Register"
+          : "Already have an Account, Login"}
+      </p>
     </div>
   );
 };

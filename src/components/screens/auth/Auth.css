@@ -1,0 +1,17 @@
+
+.auth{
+width: 15rem;
+margin-top: 10%;
+margin-left: 40%;
+}
+
+.auth-button{
+width: 50%;
+}
+
+.auth-p{
+    cursor: pointer;
+    color: orange;
+    text-decoration: underline;
+    font-weight: bold;
+}
