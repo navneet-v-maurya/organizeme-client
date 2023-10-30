@@ -1,5 +1,7 @@
+import './Dashboard.css'
+
 const Dashboard = () => {
-  return <h1>Dashboard</h1>;
+  return <div className="dash">Dashboard</div>;
 };
 
 export default Dashboard;

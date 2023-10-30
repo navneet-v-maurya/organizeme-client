@@ -1,0 +1,35 @@
+.sidebar{
+display: flex;
+flex-direction: column;
+gap: 3rem;
+padding: 1rem;
+padding-right: 2rem;
+position: relative;
+color: white;
+}
+
+.sidebar-option{
+width: 100%;
+display: flex;
+align-items: center;
+gap: 1rem;
+cursor: pointer;
+padding: 0.2rem 0.5rem;
+}
+
+.sidebar-option-active{
+padding: 0.2rem 0.5rem;
+width: 100%;
+display: flex;
+align-items: center;
+gap: 1rem;
+cursor: pointer;
+background-color: orange;
+border-radius: 0.8rem;
+}
+
+.logout-button{
+width: 75%;
+position: absolute;
+bottom: 0;
+}

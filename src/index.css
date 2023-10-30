@@ -1,10 +1,14 @@
-body{
-   padding: 0;
-   margin: 0;
-   height: 100vh;
-   background: linear-gradient(-225deg, #5D9FFF 0%, #B8DCFF 48%, #6BBBFF 100%);
-   overflow: hidden;
-}
+body {
+    font-family: 'Roboto', sans-serif;
+    padding: 1rem;
+    padding-left: 0;
+    margin: 0;
+    background-color: rgb(12, 39, 139);
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+ }
+ 
 
 p{
     padding: 0;

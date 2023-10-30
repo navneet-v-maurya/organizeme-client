@@ -45,10 +45,27 @@ const App = () => {
           element={
             user ? (
               <>
-                <Header />
-                <div style={{ display: "flex" }}>
+                <div
+                  style={{
+                    display: "grid",
+                    gridTemplateColumns: "1.5fr 10fr",
+                    height: "96vh",
+                    width: "99vw",
+                  }}
+                >
                   <SideBar />
-                  <Home />
+                  <div
+                    style={{
+                      backgroundColor: "white",
+                      display: "flex",
+                      flexDirection: "column",
+                      padding: "1rem",
+                      borderRadius: "0.5rem",
+                    }}
+                  >
+                    <Header />
+                    <Home />
+                  </div>
                 </div>
               </>
             ) : (
