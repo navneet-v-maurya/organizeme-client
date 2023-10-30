@@ -2,6 +2,8 @@ import React, { Suspense } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import CircularLoading from "../common/Loaders/CirularLoading";
 const Dashboard = React.lazy(() => import("./dashboard/Dashboard"));
+const Chat = React.lazy(() => import("./chat/Chat"));
+const Task = React.lazy(() => import("./task/Task"));
 
 const Home = () => {
   return (
@@ -12,6 +14,22 @@ const Home = () => {
           element={
             <Suspense fallback={<CircularLoading />}>
               <Dashboard />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/chat"
+          element={
+            <Suspense fallback={<CircularLoading />}>
+              <Chat />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/task"
+          element={
+            <Suspense fallback={<CircularLoading />}>
+              <Task />
             </Suspense>
           }
         />
