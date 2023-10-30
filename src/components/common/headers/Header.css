@@ -1,5 +1,16 @@
 .head{
   background-color: white;
   height: 11vh;
-  
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.rightheader{
+  display: flex;
+  flex-direction: row;
+}
+.user{
+  display: flex;
+  flex-direction: row;
 }
