@@ -12,7 +12,7 @@ const Header = () => {
       }}
     >
       <input
-        style={{ width: "60%" }}
+        style={{ width: "60%" ,backgroundColor:"rgb(221, 230, 237)"}}
         type="search"
         className="input"
         placeholder="Search Task"
@@ -22,11 +22,11 @@ const Header = () => {
         style={{ fontSize: "1.2rem", gap: "2.5rem" }}
       >
         <BsFillBellFill
-          style={{ color: " rgb(12, 39, 139)", cursor: "pointer" }}
+          style={{ color: "  rgb(39, 55, 77)", cursor: "pointer" }}
         />
         <div
           className="horizontal-container"
-          style={{ color: "orange", gap: "0.5rem", cursor: "pointer" }}
+          style={{ color: "rgb(82, 109, 130)",fontWeight:"-moz-initial", gap: "0.5rem", cursor: "pointer" }}
         >
           <CgProfile />
           <p>Navneet</p>

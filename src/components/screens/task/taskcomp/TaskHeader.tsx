@@ -9,7 +9,7 @@ const TaskHeader = () => {
         style={{
           borderRadius: "1rem",
           padding: "1rem 2rem",
-          backgroundColor: "rgb(12, 39, 139)",
+          backgroundColor: "rgb(39, 55, 77)",
           color: "white",
           fontWeight: "bold",
           cursor: "pointer",
