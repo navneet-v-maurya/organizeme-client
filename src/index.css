@@ -43,7 +43,6 @@ p{
 
 
 .vertical-container{
-    background-color: white;
     padding: 1rem;
     border-radius: 1rem;
     display: flex;
@@ -52,8 +51,6 @@ p{
 }
 
 .horizontal-container{
-    background-color: white;
-    padding: 1rem;
     border-radius: 1rem;
     display: flex;
     gap: 1rem;
