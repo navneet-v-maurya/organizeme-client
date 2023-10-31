@@ -48,7 +48,7 @@ const App = () => {
                 <div
                   style={{
                     display: "grid",
-                    gridTemplateColumns: "1.5fr 10fr",
+                    gridTemplateColumns: "1.8fr 10fr",
                     height: "96vh",
                     width: "99vw",
                   }}
@@ -59,8 +59,8 @@ const App = () => {
                       backgroundColor: "white",
                       display: "flex",
                       flexDirection: "column",
-                      padding: "1rem",
                       borderRadius: "0.5rem",
+                      padding: "0rem 1.5rem",
                     }}
                   >
                     <Header />
