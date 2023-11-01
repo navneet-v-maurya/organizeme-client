@@ -21,7 +21,7 @@ const Modal = ({ buttonName, htmlContent }: any) => {
         <div className="modal-overlay">
           <div className="modal">
             <button onClick={closeModal} className="close-button">
-              Close
+              X
             </button>
             {htmlContent}
           </div>
