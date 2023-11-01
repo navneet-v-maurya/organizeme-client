@@ -32,7 +32,7 @@ h4{
 }
 
 .button{
-    background-color:orange ;
+    background-color: rgb(39, 55, 77);
     color: white;
     padding: 1rem;
     border: none;
@@ -47,7 +47,6 @@ h4{
     
 
 }
-
 
 .vertical-container{
     padding: 1rem;

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Modal.css";
 
-const Modal = () => {
+const Modal = ({ buttonName, htmlContent }: any) => {
   const [modalOpen, setModalOpen] = useState(false);
 
   const openModal = () => {
@@ -15,7 +15,7 @@ const Modal = () => {
   return (
     <div className="modal-container">
       <button className="button" onClick={openModal}>
-        Add Task
+        {buttonName}
       </button>
       {modalOpen && (
         <div className="modal-overlay">
@@ -23,7 +23,7 @@ const Modal = () => {
             <button onClick={closeModal} className="close-button">
               Close
             </button>
-            <p>This is the modal content.</p>
+            {htmlContent}
           </div>
         </div>
       )}
