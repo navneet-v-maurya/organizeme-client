@@ -4,6 +4,7 @@ import { BsChatLeftText } from "react-icons/bs";
 import { RxDashboard } from "react-icons/rx";
 import { BsListTask } from "react-icons/bs";
 import { AiOutlinePoweroff } from "react-icons/ai";
+import { HiOutlineUserGroup } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
@@ -25,10 +26,16 @@ const SideBar = () => {
       navigate: "/home/chat",
     },
     {
-      name: "Task",
+      name: "My Task",
       id: 3,
       icon: <BsListTask />,
       navigate: "/home/task",
+    },
+    {
+      name: "Group Task",
+      id: 4,
+      icon: <HiOutlineUserGroup />,
+      navigate: "/home/group-task",
     },
   ];
 

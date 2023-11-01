@@ -3,15 +3,18 @@
 width: 15rem;
 margin-top: 10%;
 margin-left: 40%;
+background-color: white;
 }
 
 .auth-button{
 width: 50%;
+background-color: rgb(39, 55, 77);
 }
+
 
 .auth-p{
     cursor: pointer;
-    color: orange;
+    color: rgb(39, 55, 77);
     text-decoration: underline;
     font-weight: bold;
 }

@@ -23,7 +23,7 @@ h4{
 }
 
 .input{
-    background-color: rgb(232, 209, 209);
+    background-color: rgb(221, 230, 237);
     padding: 1rem;
     outline: none;
     border-radius: 0.8rem;
@@ -32,7 +32,7 @@ h4{
 }
 
 .button{
-    background-color:orange ;
+    background-color: rgb(39, 55, 77);
     color: white;
     padding: 1rem;
     border: none;
@@ -42,12 +42,11 @@ h4{
 }
 
 .button:hover{
-    color: orange;
-    background-color: white;
-    border: 1px solid orange;
+    color: white;
+    background-color: rgb(82, 109, 130);
+    
 
 }
-
 
 .vertical-container{
     padding: 1rem;

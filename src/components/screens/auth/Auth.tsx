@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./Auth.css";
+import { toast } from "react-toastify";
 
 interface UserData {
   name: string;
@@ -43,7 +44,8 @@ const Auth: React.FC<MyProps> = (props) => {
         })
         .catch((err: any) => {
           props.setLoading(false);
-          props.setErr(err.message);
+          toast.error(err.response.data.message);
+          props.setErr(err.response.data.message);
         });
     } else {
       if (userData.password !== userData.confirmPassword) {
@@ -127,8 +129,8 @@ const Auth: React.FC<MyProps> = (props) => {
 
       <p className="auth-p" onClick={() => setIsLogin(!isLogin)}>
         {isLogin
-          ? "Don't have an Account, Register"
-          : "Already have an Account, Login"}
+          ? "Don't have an Account? Register here"
+          : "Already have an Account? Login here"}
       </p>
     </div>
   );

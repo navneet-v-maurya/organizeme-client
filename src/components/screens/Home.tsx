@@ -4,6 +4,7 @@ import CircularLoading from "../common/Loaders/CirularLoading";
 const Dashboard = React.lazy(() => import("./dashboard/Dashboard"));
 const Chat = React.lazy(() => import("./chat/Chat"));
 const Task = React.lazy(() => import("./task/Task"));
+const GroupTask = React.lazy(() => import("./group_task/GroupTask"));
 
 const Home = () => {
   return (
@@ -25,11 +26,21 @@ const Home = () => {
             </Suspense>
           }
         />
+
         <Route
           path="/task"
           element={
             <Suspense fallback={<CircularLoading />}>
               <Task />
+            </Suspense>
+          }
+        />
+
+        <Route
+          path="/group-task"
+          element={
+            <Suspense fallback={<CircularLoading />}>
+              <GroupTask />
             </Suspense>
           }
         />

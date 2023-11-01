@@ -1,8 +1,9 @@
-import React, { Suspense, useEffect, useState } from "react";
+import React, { Suspense, useState } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import CircularLoading from "./components/common/Loaders/CirularLoading";
 import NotFound from "./components/screens/notfound/NotFound";
-import { toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Auth = React.lazy(() => import("./components/screens/auth/Auth"));
 const Home = React.lazy(() => import("./components/screens/Home"));
@@ -15,16 +16,18 @@ const App = () => {
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState(null);
 
-  useEffect(() => {
-    if (err) {
-      toast.error(err);
-    }
-  }, [err]);
+  // useEffect(() => {
+  //   if (err) {
+  //     console.log(err);
+  //     toast.error(err);
+  //   }
+  // }, [err]);
 
   return loading ? (
     <CircularLoading />
   ) : (
     <Suspense fallback={<CircularLoading />}>
+      <ToastContainer position={toast.POSITION.TOP_CENTER} />
       <Routes>
         <Route
           path="/"
