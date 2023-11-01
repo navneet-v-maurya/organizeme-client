@@ -129,8 +129,8 @@ const Auth: React.FC<MyProps> = (props) => {
 
       <p className="auth-p" onClick={() => setIsLogin(!isLogin)}>
         {isLogin
-          ? "Don't have an Account, Register"
-          : "Already have an Account, Login"}
+          ? "Don't have an Account? Register here"
+          : "Already have an Account? Login here"}
       </p>
     </div>
   );
