@@ -1,81 +1,104 @@
 import React, { useState } from "react";
-import axios from "axios";
 import "./Auth.css";
 import { toast } from "react-toastify";
+import OTP from "./OTP";
+import Modal2 from "../../common/modals/Modal2";
+import { useDispatch } from "react-redux";
+import { login, register, generateOtp } from "../../../apis/auth";
+import { setUser, setLoading, setErr } from "../../../redux/slice/Auth_Slice";
 
 interface UserData {
   name: string;
   email: string;
   password: string;
   confirmPassword: string;
+  otp: string;
 }
 
-interface MyProps {
-  setLoading: any;
-  setUser: any;
-  setErr: any;
-}
+const Auth: React.FC = () => {
+  const dispatch = useDispatch();
 
-const Auth: React.FC<MyProps> = (props) => {
   const [isLogin, setIsLogin] = useState(true);
   const [userData, setUserData] = useState<UserData>({
     name: "",
     email: "",
     password: "",
     confirmPassword: "",
+    otp: "",
   });
 
-  const handleFormSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  const [open, setOpen] = useState(false);
 
-    props.setLoading(true);
+  const handleLogin = () => {
+    dispatch(setLoading(true));
 
-    if (isLogin) {
-      const payload = {
-        email: userData.email,
-        password: userData.password,
-      };
-      console.log(payload);
-      axios
-        .post("https://organize-me-server.onrender.com/auth/login", payload)
-        .then((res: any) => {
-          props.setLoading(false);
-          props.setUser(res.data.data);
-        })
-        .catch((err: any) => {
-          props.setLoading(false);
-          toast.error(err.response.data.message);
-          props.setErr(err.response.data.message);
-        });
-    } else {
-      if (userData.password !== userData.confirmPassword) {
-        props.setLoading(false);
-        props.setErr("Passwords do not match");
-        return;
-      }
+    const payload = {
+      email: userData.email,
+      password: userData.password,
+    };
 
-      const payload = {
-        name: userData.name,
-        email: userData.email,
-        password: userData.password,
-      };
+    login(payload)
+      .then((res: any) => {
+        dispatch(setLoading(false));
+        dispatch(setUser(res.data.data));
+      })
+      .catch((err: any) => {
+        dispatch(setLoading(false));
+        toast.error(err.response.data.message);
+        setErr(err.response.data.message);
+      });
+  };
 
-      axios
-        .post("https://organize-me-server.onrender.com/auth/register", payload)
-        .then((res: any) => {
-          console.log(res.data.data);
-          props.setLoading(false);
-          props.setUser(res.data.data);
-        })
-        .catch((err: any) => {
-          props.setLoading(false);
-          props.setErr(err.message);
-        });
+  const hadleGenrateOtp = () => {
+    if (userData.password !== userData.confirmPassword) {
+      toast.error("Password and confirm pass should match");
+      return;
     }
+
+    const payload = {
+      email: userData.email,
+    };
+
+    setOpen(true);
+    generateOtp(payload)
+      .then((res: any) => {
+        toast.success("Otp sent Successfully!");
+      })
+      .catch((err: any) => {
+        toast.error(err.response.data.message);
+      });
+  };
+
+  const handleReister = () => {
+    dispatch(setLoading(true));
+
+    const payload = {
+      name: userData.name,
+      email: userData.email,
+      password: userData.password,
+      otp: Number(userData.otp),
+    };
+
+    register(payload)
+      .then((res: any) => {
+        dispatch(setLoading(false));
+        dispatch(setUser(res.data.data));
+      })
+      .catch((err: any) => {
+        dispatch(setLoading(false));
+        toast.error(err.response.data.message);
+        setErr(err.response.data.message);
+      });
   };
 
   const handleReset = () => {
-    setUserData({ name: "", email: "", password: "", confirmPassword: "" });
+    setUserData({
+      name: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+      otp: "",
+    });
   };
 
   return (
@@ -112,22 +135,49 @@ const Auth: React.FC<MyProps> = (props) => {
           placeholder="Confirm Password"
           type="password"
           value={userData.confirmPassword}
-          onChange={(e) =>
-            setUserData({ ...userData, confirmPassword: e.target.value })
-          }
+          onChange={(e) => {
+            setUserData({ ...userData, confirmPassword: e.target.value });
+          }}
         />
       )}
 
-      <div className="horizontal-container" style={{ padding: 0 }}>
-        <button className="button auth-button" onClick={handleFormSubmit}>
-          {isLogin ? "Login" : "Register"}
-        </button>
+      <div className="horizontal-container auth-buttons" style={{ padding: 0 }}>
+        {isLogin ? (
+          <button className="button auth-button" onClick={handleLogin}>
+            Login
+          </button>
+        ) : (
+          <div>
+            <button className="button" onClick={hadleGenrateOtp}>
+              Register
+            </button>
+            {open && (
+              <Modal2
+                open={open}
+                htmlContent={
+                  <OTP
+                    user={userData}
+                    setUserData={setUserData}
+                    hadleGenrateOtp={hadleGenrateOtp}
+                    handleReister={handleReister}
+                  />
+                }
+              />
+            )}
+          </div>
+        )}
         <button className="button  auth-button" onClick={handleReset}>
           Reset
         </button>
       </div>
 
-      <p className="auth-p" onClick={() => setIsLogin(!isLogin)}>
+      <p
+        className="auth-p"
+        onClick={() => {
+          setIsLogin(!isLogin);
+          handleReset();
+        }}
+      >
         {isLogin
           ? "Don't have an Account? Register here"
           : "Already have an Account? Login here"}

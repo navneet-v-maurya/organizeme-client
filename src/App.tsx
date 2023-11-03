@@ -1,9 +1,10 @@
-import React, { Suspense, useState } from "react";
+import React, { Suspense } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import CircularLoading from "./components/common/Loaders/CirularLoading";
 import NotFound from "./components/screens/notfound/NotFound";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useSelector } from "react-redux";
 
 const Auth = React.lazy(() => import("./components/screens/auth/Auth"));
 const Home = React.lazy(() => import("./components/screens/Home"));
@@ -12,16 +13,7 @@ const SideBar = React.lazy(() => import("./components/common/headers/SideBar"));
 const Header = React.lazy(() => import("./components/common/headers/Header"));
 
 const App = () => {
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [err, setErr] = useState(null);
-
-  // useEffect(() => {
-  //   if (err) {
-  //     console.log(err);
-  //     toast.error(err);
-  //   }
-  // }, [err]);
+  const { user, loading } = useSelector((state: any) => state.auth);
 
   return loading ? (
     <CircularLoading />
@@ -35,13 +27,7 @@ const App = () => {
         />
         <Route
           path="/auth"
-          element={
-            !user ? (
-              <Auth setErr={setErr} setLoading={setLoading} setUser={setUser} />
-            ) : (
-              <Navigate to="/home" />
-            )
-          }
+          element={!user ? <Auth /> : <Navigate to="/home" />}
         />
         <Route
           path="/home/*"
