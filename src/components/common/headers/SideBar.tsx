@@ -7,8 +7,11 @@ import { AiOutlinePoweroff } from "react-icons/ai";
 import { HiOutlineUserGroup } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { logout } from "../../../redux/slice/Auth_Slice";
 
 const SideBar = () => {
+  const dispatch = useDispatch();
   const [isActive, setIsActive] = useState(1);
   const navigate = useNavigate();
 
@@ -65,7 +68,12 @@ const SideBar = () => {
         })}
       </div>
 
-      <div className="logout-button sidebar-option-active">
+      <div
+        onClick={() => {
+          dispatch(logout());
+        }}
+        className="logout-button sidebar-option-active"
+      >
         <AiOutlinePoweroff />
         <p className="logout">Logout</p>
       </div>

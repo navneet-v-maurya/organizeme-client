@@ -6,9 +6,12 @@ margin-left: 40%;
 background-color: white;
 }
 
+.auth-buttons > :nth-child(1){
+width: 40%;
+}
+
 .auth-button{
 width: 50%;
-background-color: rgb(39, 55, 77);
 }
 
 

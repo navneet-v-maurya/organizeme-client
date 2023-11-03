@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Modal.css";
 
-const Modal = ({ buttonName, htmlContent }: any) => {
+const Modal2 = ({ htmlContent, open }: any) => {
   const [modalOpen, setModalOpen] = useState(false);
 
-  const openModal = () => {
-    setModalOpen(true);
-  };
+  useEffect(() => {
+    setModalOpen(open);
+  }, [open]);
 
   const closeModal = () => {
     setModalOpen(false);
@@ -14,9 +14,6 @@ const Modal = ({ buttonName, htmlContent }: any) => {
 
   return (
     <div className="modal-container">
-      <button className="button" onClick={openModal}>
-        {buttonName}
-      </button>
       {modalOpen && (
         <div className="modal-overlay">
           <div className="modal">
@@ -31,4 +28,4 @@ const Modal = ({ buttonName, htmlContent }: any) => {
   );
 };
 
-export default Modal;
+export default Modal2;
