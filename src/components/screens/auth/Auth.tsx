@@ -6,6 +6,7 @@ import Modal2 from "../../common/modals/Modal2";
 import { useDispatch } from "react-redux";
 import { login, register, generateOtp } from "../../../apis/auth";
 import { setUser, setLoading, setErr } from "../../../redux/slice/Auth_Slice";
+import axios from "axios";
 
 interface UserData {
   name: string;
@@ -38,11 +39,23 @@ const Auth: React.FC = () => {
     };
 
     login(payload)
-      .then((res: any) => {
+      .then((res) => {
         dispatch(setLoading(false));
         dispatch(setUser(res.data.data));
+
+        axios.interceptors.request.use((config) => {
+          const token = localStorage.getItem("TOKEN");
+          const refreshToken = localStorage.getItem("REFRESH_TOKEN");
+
+          if (token && refreshToken) {
+            config.headers["token"] = token;
+            config.headers["refresh-token"] = refreshToken;
+          }
+
+          return config;
+        });
       })
-      .catch((err: any) => {
+      .catch((err) => {
         dispatch(setLoading(false));
         toast.error(err.response.data.message);
         setErr(err.response.data.message);
