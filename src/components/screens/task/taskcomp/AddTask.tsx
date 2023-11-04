@@ -1,4 +1,6 @@
-import { useState } from "react"
+import { useState } from "react";
+import { add_my_task } from "../../../../apis/my_task";
+import { toast } from "react-toastify";
 
 const AddTask = () => {
   const [task, setTask] = useState({
@@ -6,13 +8,19 @@ const AddTask = () => {
     description: "",
     start: "",
     end: "",
-  })
+  });
   const handleChange = (e: any) => {
-    setTask({ ...task, [e.target.name]: e.target.value })
-  }
+    setTask({ ...task, [e.target.name]: e.target.value });
+  };
   const handleClick = () => {
-    console.log(task)
-  }
+    add_my_task(task)
+      .then((res) => {
+        toast.success("Task added successfully");
+      })
+      .catch((err) => {
+        toast.error(err.response.data.message);
+      });
+  };
 
   return (
     <div
@@ -79,7 +87,7 @@ const AddTask = () => {
         Add task
       </button>
     </div>
-  )
-}
+  );
+};
 
-export default AddTask
+export default AddTask;
