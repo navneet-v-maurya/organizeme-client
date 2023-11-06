@@ -3,6 +3,7 @@ import { add_my_task } from "../../../../apis/my_task";
 import { toast } from "react-toastify";
 
 const AddTask = () => {
+  const [loading, setLoading] = useState(false);
   const [task, setTask] = useState({
     title: "",
     description: "",
@@ -13,13 +14,20 @@ const AddTask = () => {
     setTask({ ...task, [e.target.name]: e.target.value });
   };
   const handleClick = () => {
+    setLoading(true);
     add_my_task(task)
       .then((res) => {
+        setLoading(false);
         toast.success("Task added successfully");
       })
       .catch((err) => {
+        setLoading(false);
         toast.error(err.response.data.message);
       });
+  };
+
+  const handleReset = () => {
+    setTask({ title: "", description: "", start: "", end: "" });
   };
 
   return (
@@ -83,9 +91,32 @@ const AddTask = () => {
           />
         </div>
       </div>
-      <button onClick={handleClick} className="button">
-        Add task
-      </button>
+      <div className="horizontal-container">
+        {loading ? (
+          <div
+            style={{ width: "50%", padding: "0", alignItems: "center" }}
+            className="vertical-container"
+          >
+            <div className="button-loading"></div>
+          </div>
+        ) : (
+          <button
+            style={{ width: "50%" }}
+            onClick={handleClick}
+            className="button"
+            disabled={loading}
+          >
+            Add Task
+          </button>
+        )}
+        <button
+          style={{ width: "50%" }}
+          className="button loading-button"
+          onClick={handleReset}
+        >
+          Reset
+        </button>
+      </div>
     </div>
   );
 };

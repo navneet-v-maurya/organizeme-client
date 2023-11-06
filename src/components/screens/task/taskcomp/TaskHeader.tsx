@@ -1,3 +1,4 @@
+import CustomDatePicker from "../../../common/dates/DatePicker";
 import Modal from "../../../common/modals/Modal";
 import AddTask from "./AddTask";
 
@@ -7,7 +8,7 @@ const TaskHeader = () => {
       className="horizontal-container"
       style={{ height: "10%", justifyContent: "space-between" }}
     >
-      <div>Date Picker</div>
+      <CustomDatePicker />
       <Modal buttonName="Add Task" htmlContent={<AddTask />} />
     </div>
   );
