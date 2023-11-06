@@ -13,7 +13,7 @@ const TaskCard = (props: any) => {
         className="horizontal-container"
         style={{ justifyContent: "space-between", marginBottom: "0.5rem" }}
       >
-        <h4 style={{ color: "rgb(39, 55, 77)" }}>{props.task.todo}</h4>
+        <h4 style={{ color: "rgb(39, 55, 77)" }}>{props.task.title}</h4>
         <LuMoreVertical
           style={{
             fontSize: "1rem",

@@ -1,81 +1,60 @@
+import { useEffect, useState } from "react";
 import "./Task.css";
 import TaskBar from "./taskcomp/TaskBar";
 import TaskHeader from "./taskcomp/TaskHeader";
+import { get_my_task } from "../../../apis/my_task";
+import { toast } from "react-toastify";
+import CircularLoading from "../../common/Loaders/CirularLoading";
 
 const Task = () => {
-  const demotasks = {
-    created: [
-      {
-        _id: "1",
-        todo: "Taking dog to park",
-        details:
-          "I have to take my dog to park so that it does not gets lazy I have to take my dog to park so that it does not gets lazy and fat and fat just by overeating I have to take my dog to park so that it does not gets lazy",
-        status: "created",
-        start: "2023-01-01T00:00:00.000+00:00",
-        end: "2023-01-10T00:00:00.000+00:00",
-        createdAt: "2023-10-16T08:49:41.967+00:00",
-        updatedAt: "2023-10-16T08:49:41.967+00:00",
-      },
-      {
-        _id: "1",
-        todo: "Taking dog to park",
-        details:
-          "I have to take my dog to park so that it does not gets lazy and fat just by overeating",
-        status: "created",
-        start: "2023-01-01T00:00:00.000+00:00",
-        end: "2023-01-10T00:00:00.000+00:00",
-        createdAt: "2023-10-16T08:49:41.967+00:00",
-        updatedAt: "2023-10-16T08:49:41.967+00:00",
-      },
-      {
-        _id: "1",
-        todo: "Taking dog to park",
-        details:
-          "I have to take my dog to park so that it does not gets lazy and fat just by overeating",
-        status: "created",
-        start: "2023-01-01T00:00:00.000+00:00",
-        end: "2023-01-10T00:00:00.000+00:00",
-        createdAt: "2023-10-16T08:49:41.967+00:00",
-        updatedAt: "2023-10-16T08:49:41.967+00:00",
-      },
-    ],
-    progress: [
-      {
-        _id: "1",
-        todo: "Taking dog to park",
-        details:
-          "I have to take my dog to park so that it does not gets lazy and fat just by overeating",
-        status: "created",
-        start: "2023-01-01T00:00:00.000+00:00",
-        end: "2023-01-10T00:00:00.000+00:00",
-        createdAt: "2023-10-16T08:49:41.967+00:00",
-        updatedAt: "2023-10-16T08:49:41.967+00:00",
-      },
-    ],
+  const [dailyDate, setDailyDate] = useState(null);
+  const [start, setStart] = useState();
+  const [end, setEnd] = useState(null);
+  const [tasks, setTasks] = useState({
+    created: [],
+    progress: [],
+    completed: [],
+  });
+  const [loading, setLoading] = useState(false);
 
-    completed: [
-      {
-        _id: "1",
-        todo: "Taking dog to park",
-        details:
-          "I have to take my dog to park so that it does not gets lazy and fat just by overeating",
-        status: "created",
-        start: "2023-01-01T00:00:00.000+00:00",
-        end: "2023-01-10T00:00:00.000+00:00",
-        createdAt: "2023-10-16T08:49:41.967+00:00",
-        updatedAt: "2023-10-16T08:49:41.967+00:00",
-      },
-    ],
-  };
+  useEffect(() => {
+    setLoading(true);
+    let query = "";
+    if (dailyDate) {
+      query = `?date=${dailyDate}`;
+    } else if (start && end) {
+      query = `?start=${start}&end=${end}`;
+    }
+    get_my_task(query)
+      .then((res) => {
+        setTasks(res.data.data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        setLoading(false);
+        toast.error(err.response.data.message);
+      });
+  }, [dailyDate, start, end]);
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", height: "100%" }}>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        height: "100%",
+        position: "relative",
+      }}
+    >
       <TaskHeader />
-      <div className="task">
-        <TaskBar data={demotasks.created} type="Created" />
-        <TaskBar data={demotasks.progress} type="In-Progress" />
-        <TaskBar data={demotasks.completed} type="Completed" />
-      </div>
+      {loading ? (
+        <CircularLoading />
+      ) : (
+        <div className="task">
+          <TaskBar data={tasks?.created} type="Created" />
+          <TaskBar data={tasks.progress} type="In-Progress" />
+          <TaskBar data={tasks.completed} type="Completed" />
+        </div>
+      )}
     </div>
   );
 };
