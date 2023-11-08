@@ -1,8 +1,12 @@
 import { useState } from "react";
 import { add_my_task } from "../../../../apis/my_task";
 import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { logout } from "../../../../redux/slice/Auth_Slice";
 
 const AddTask = () => {
+  const dispatch = useDispatch();
+
   const [loading, setLoading] = useState(false);
   const [task, setTask] = useState({
     title: "",
@@ -19,10 +23,14 @@ const AddTask = () => {
       .then((res) => {
         setLoading(false);
         toast.success("Task added successfully");
+        window.location.reload();
       })
       .catch((err) => {
         setLoading(false);
         toast.error(err.response.data.message);
+        if (err.response.data.status === 401) {
+          dispatch(logout());
+        }
       });
   };
 

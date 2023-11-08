@@ -12,3 +12,9 @@ export const get_my_task = (query: any) => {
     `https://organize-me-server.onrender.com/my_task/get_my_task${query}`
   );
 };
+
+export const delete_my_task = (query: any) => {
+  return axios.delete(
+    `https://organize-me-server.onrender.com/my_task/delete_my_task${query}`
+  );
+};

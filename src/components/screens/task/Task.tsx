@@ -5,8 +5,11 @@ import TaskHeader from "./taskcomp/TaskHeader";
 import { get_my_task } from "../../../apis/my_task";
 import { toast } from "react-toastify";
 import CircularLoading from "../../common/Loaders/CirularLoading";
+import { useDispatch } from "react-redux";
+import { logout } from "../../../redux/slice/Auth_Slice";
 
 const Task = () => {
+  const dispatch = useDispatch();
   const [dailyDate, setDailyDate] = useState(null);
   const [start, setStart] = useState();
   const [end, setEnd] = useState(null);
@@ -33,6 +36,9 @@ const Task = () => {
       .catch((err) => {
         setLoading(false);
         toast.error(err.response.data.message);
+        if (err.response.data.status === 401) {
+          dispatch(logout());
+        }
       });
   }, [dailyDate, start, end]);
 

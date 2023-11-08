@@ -6,14 +6,21 @@ import { BsListTask } from "react-icons/bs";
 import { AiOutlinePoweroff } from "react-icons/ai";
 import { HiOutlineUserGroup } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { logout } from "../../../redux/slice/Auth_Slice";
 
 const SideBar = () => {
   const dispatch = useDispatch();
-  const [isActive, setIsActive] = useState(1);
+  const [isActive, setIsActive] = useState(
+    +(localStorage.getItem("activeItem") || 1)
+  );
+
   const navigate = useNavigate();
+
+  useEffect(() => {
+    localStorage.setItem("activeItem", isActive.toString());
+  }, [isActive]);
 
   const sidebar_data = [
     {
