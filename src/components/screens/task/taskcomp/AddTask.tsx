@@ -10,7 +10,7 @@ const AddTask = () => {
   const [loading, setLoading] = useState(false);
   const [task, setTask] = useState({
     title: "",
-    description: "",
+    details: "",
     start: "",
     end: "",
   });
@@ -35,7 +35,7 @@ const AddTask = () => {
   };
 
   const handleReset = () => {
-    setTask({ title: "", description: "", start: "", end: "" });
+    setTask({ title: "", details: "", start: "", end: "" });
   };
 
   return (
@@ -69,8 +69,8 @@ const AddTask = () => {
         }}
         className="input"
         onChange={handleChange}
-        name="description"
-        value={task.description}
+        name="details"
+        value={task.details}
         placeholder="Description"
       ></textarea>
       <div style={{ display: "flex", justifyContent: "space-evenly" }}>
