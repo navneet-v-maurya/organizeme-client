@@ -1,15 +1,27 @@
 import { FaTrash, FaEdit } from "react-icons/fa";
 import { LuMoreVertical } from "react-icons/lu";
 import moment from "moment";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { delete_my_task } from "../../../../apis/my_task";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { logout } from "../../../../redux/slice/Auth_Slice";
+import Modal2 from "../../../common/modals/Modal2";
+import AddTask from "./AddTask";
 
 const TaskCard = (props: any) => {
+  const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
+  const [myTask, setMyTask] = useState(null);
+
+  useEffect(() => {
+    setMyTask({
+      ...props?.task,
+      start: moment(props?.task.start).format("YYYY-MM-DD"),
+      end: moment(props?.task.end).format("YYYY-MM-DD"),
+    });
+  }, [props?.task, open]);
 
   const handleDelete = () => {
     setLoading(true);
@@ -28,8 +40,6 @@ const TaskCard = (props: any) => {
         }
       });
   };
-
-  const handleEdit = () => {};
 
   return (
     <div className="task-card">
@@ -67,10 +77,21 @@ const TaskCard = (props: any) => {
             <FaTrash />
           </button>
         )}
-        <button onClick={handleEdit}>
+        <button
+          onClick={() => {
+            setOpen(true);
+          }}
+        >
           <FaEdit />
         </button>
       </div>
+      <Modal2
+        htmlContent={
+          <AddTask task={myTask} setTask={setMyTask} type="update" />
+        }
+        modalOpen={open}
+        setModalOpen={setOpen}
+      />
     </div>
   );
 };

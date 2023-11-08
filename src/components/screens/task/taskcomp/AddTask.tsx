@@ -1,37 +1,56 @@
 import { useState } from "react";
-import { add_my_task } from "../../../../apis/my_task";
+import { add_my_task, update_my_task } from "../../../../apis/my_task";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { logout } from "../../../../redux/slice/Auth_Slice";
 
-const AddTask = () => {
+const AddTask = ({ task, setTask, type }: any) => {
   const dispatch = useDispatch();
 
   const [loading, setLoading] = useState(false);
-  const [task, setTask] = useState({
-    title: "",
-    details: "",
-    start: "",
-    end: "",
-  });
+
   const handleChange = (e: any) => {
     setTask({ ...task, [e.target.name]: e.target.value });
   };
   const handleClick = () => {
     setLoading(true);
-    add_my_task(task)
-      .then((res) => {
-        setLoading(false);
-        toast.success("Task added successfully");
-        window.location.reload();
-      })
-      .catch((err) => {
-        setLoading(false);
-        toast.error(err.response.data.message);
-        if (err.response.data.status === 401) {
-          dispatch(logout());
-        }
-      });
+    if (type === "create") {
+      add_my_task(task)
+        .then((res) => {
+          setLoading(false);
+          toast.success("Task added successfully");
+          window.location.reload();
+        })
+        .catch((err) => {
+          setLoading(false);
+          toast.error(err.response.data.message);
+          if (err.response.data.status === 401) {
+            dispatch(logout());
+          }
+        });
+    } else {
+      const payload = {
+        id: task._id,
+        title: task.title,
+        details: task.details,
+        start: task.start,
+        end: task.end,
+        status: task.status,
+      };
+      update_my_task(payload)
+        .then((res) => {
+          setLoading(false);
+          toast.success("Task updated successfully");
+          window.location.reload();
+        })
+        .catch((err) => {
+          setLoading(false);
+          toast.error(err.response.data.message);
+          if (err.response.data.status === 401) {
+            dispatch(logout());
+          }
+        });
+    }
   };
 
   const handleReset = () => {
@@ -48,7 +67,7 @@ const AddTask = () => {
         gap: "1rem",
       }}
     >
-      <h4>Add your Task</h4>
+      <h4>{type === "create" ? "Add your Task" : "Update Task"}</h4>
       <input
         onChange={handleChange}
         style={{ width: "90%", backgroundColor: "rgb(221, 230, 237)" }}
@@ -114,7 +133,7 @@ const AddTask = () => {
             className="button"
             disabled={loading}
           >
-            Add Task
+            {type === "create" ? "Add Task" : "Update Task"}
           </button>
         )}
         <button

@@ -18,3 +18,10 @@ export const delete_my_task = (query: any) => {
     `https://organize-me-server.onrender.com/my_task/delete_my_task${query}`
   );
 };
+
+export const update_my_task = (payload: any) => {
+  return axios.patch(
+    "https://organize-me-server.onrender.com/my_task/update_my_task",
+    payload
+  );
+};
