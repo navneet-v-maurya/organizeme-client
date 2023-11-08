@@ -1,13 +1,6 @@
-import React, { useEffect, useState } from "react";
 import "./Modal.css";
 
-const Modal2 = ({ htmlContent, open }: any) => {
-  const [modalOpen, setModalOpen] = useState(false);
-
-  useEffect(() => {
-    setModalOpen(open);
-  }, [open]);
-
+const Modal2 = ({ htmlContent, modalOpen, setModalOpen }: any) => {
   const closeModal = () => {
     setModalOpen(false);
   };
