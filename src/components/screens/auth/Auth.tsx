@@ -42,18 +42,6 @@ const Auth: React.FC = () => {
       .then((res) => {
         dispatch(setLoading(false));
         dispatch(setUser(res.data.data));
-
-        axios.interceptors.request.use((config) => {
-          const token = localStorage.getItem("TOKEN");
-          const refreshToken = localStorage.getItem("REFRESH_TOKEN");
-
-          if (token && refreshToken) {
-            config.headers["token"] = token;
-            config.headers["refresh-token"] = refreshToken;
-          }
-
-          return config;
-        });
       })
       .catch((err) => {
         dispatch(setLoading(false));
