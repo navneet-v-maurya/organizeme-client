@@ -92,6 +92,20 @@ const AddTask = ({ task, setTask, type }: any) => {
         value={task.details}
         placeholder="Description"
       ></textarea>
+      {type === "update" ? (
+        <select
+          value={task.status}
+          onChange={handleChange}
+          name="status"
+          className="input"
+        >
+          <option value="created">Created</option>
+          <option value="in-progress">In Progress</option>
+          <option value="completed">Completed</option>
+        </select>
+      ) : (
+        ""
+      )}
       <div style={{ display: "flex", justifyContent: "space-evenly" }}>
         <div>
           <label style={{ fontWeight: "bolder" }} htmlFor="Start-date">

@@ -6,7 +6,6 @@ import Modal2 from "../../common/modals/Modal2";
 import { useDispatch } from "react-redux";
 import { login, register, generateOtp } from "../../../apis/auth";
 import { setUser, setLoading, setErr } from "../../../redux/slice/Auth_Slice";
-import axios from "axios";
 
 interface UserData {
   name: string;
