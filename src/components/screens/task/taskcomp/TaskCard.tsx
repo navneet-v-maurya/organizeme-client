@@ -29,7 +29,7 @@ const TaskCard = (props: any) => {
     delete_my_task(query)
       .then((res) => {
         setLoading(false);
-        toast.success("Tasl deleted successfully");
+        toast.success("Task deleted successfully");
         window.location.reload();
       })
       .catch((err) => {

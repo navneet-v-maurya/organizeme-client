@@ -11,8 +11,6 @@ import { logout } from "../../../redux/slice/Auth_Slice";
 const Task = () => {
   const dispatch = useDispatch();
   const [dailyDate, setDailyDate] = useState(null);
-  const [start, setStart] = useState();
-  const [end, setEnd] = useState(null);
   const [tasks, setTasks] = useState({
     created: [],
     progress: [],
@@ -25,8 +23,6 @@ const Task = () => {
     let query = "";
     if (dailyDate) {
       query = `?date=${dailyDate}`;
-    } else if (start && end) {
-      query = `?start=${start}&end=${end}`;
     }
     get_my_task(query)
       .then((res) => {
@@ -40,7 +36,7 @@ const Task = () => {
           dispatch(logout());
         }
       });
-  }, [dailyDate, start, end]);
+  }, [dailyDate]);
 
   return (
     <div
@@ -51,7 +47,7 @@ const Task = () => {
         position: "relative",
       }}
     >
-      <TaskHeader />
+      <TaskHeader date={dailyDate} setDate={setDailyDate} />
       {loading ? (
         <CircularLoading />
       ) : (
