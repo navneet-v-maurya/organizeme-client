@@ -7,10 +7,11 @@ import { toast } from "react-toastify";
 import CircularLoading from "../../common/Loaders/CirularLoading";
 import { useDispatch } from "react-redux";
 import { logout } from "../../../redux/slice/Auth_Slice";
+import moment from "moment";
 
 const Task = () => {
   const dispatch = useDispatch();
-  const [dailyDate, setDailyDate] = useState(null);
+  const [dailyDate, setDailyDate] = useState(moment().format("YYYY-MM-DD"));
   const [tasks, setTasks] = useState({
     created: [],
     progress: [],
