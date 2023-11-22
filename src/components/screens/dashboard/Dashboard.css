@@ -1,0 +1,33 @@
+.dashboard {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  height: 71vh;
+  justify-content: space-between;
+}
+
+.charts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: 71vh;
+  justify-content: space-between;
+}
+
+.task-table {
+  margin-top: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
+}
