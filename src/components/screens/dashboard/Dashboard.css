@@ -1,0 +1,26 @@
+.pie-chart {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  height: 15rem;
+  gap: 5rem;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+  background-color: rgb(39, 55, 77);
+  border: 2px solid rgb(39, 55, 77);
+  padding: 1rem;
+  color: white;
+  border-top-right-radius: 0.2rem;
+  border-top-left-radius: 0.2rem;
+}
+
+td {
+  border: 2px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}

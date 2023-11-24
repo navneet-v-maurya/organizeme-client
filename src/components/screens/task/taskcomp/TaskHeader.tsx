@@ -3,7 +3,6 @@ import AddTask from "./AddTask";
 import Modal2 from "../../../common/modals/Modal2";
 
 const TaskHeader = ({ date, setDate }: any) => {
-  console.log(date);
   const [open, setOpen] = useState(false);
   const [task, setTask] = useState({
     title: "",
