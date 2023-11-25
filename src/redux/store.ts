@@ -25,7 +25,9 @@ const store = configureStore({
   preloadedState: initialState as any,
 });
 
-const { token, refreshToken } = store.getState().auth;
+const token = localStorage.getItem("TOKEN");
+const refreshToken = localStorage.getItem("REFRESH_TOKEN");
+//const { token, refreshToken } = store.getState().auth;
 
 axios.interceptors.request.use((config) => {
   if (token && refreshToken) {
