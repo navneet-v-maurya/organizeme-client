@@ -13,8 +13,6 @@ const initialState = {
     isAuthenticated: !!loadUser(),
     loading: false,
     error: null,
-    token: localStorage.getItem("TOKEN") || null,
-    refreshToken: localStorage.getItem("REFRESH_TOKEN") || null,
   },
 };
 
@@ -25,14 +23,12 @@ const store = configureStore({
   preloadedState: initialState as any,
 });
 
-const token = localStorage.getItem("TOKEN");
-const refreshToken = localStorage.getItem("REFRESH_TOKEN");
-//const { token, refreshToken } = store.getState().auth;
-
 axios.interceptors.request.use((config) => {
-  if (token && refreshToken) {
-    config.headers["token"] = token;
-    config.headers["refresh-token"] = refreshToken;
+  const user = loadUser();
+
+  if (user) {
+    config.headers["token"] = user.accessToken || null;
+    config.headers["refresh-token"] = user.refreshToken || null;
   }
 
   return config;

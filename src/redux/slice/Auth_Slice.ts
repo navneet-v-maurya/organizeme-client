@@ -19,8 +19,7 @@ const authSlice = createSlice({
       state.refreshToken = action.payload.refreshToken;
       state.isAuthenticated = true;
       localStorage.setItem("user", JSON.stringify(action.payload));
-      localStorage.setItem("TOKEN", action.payload.accessToken);
-      localStorage.setItem("REFRESH_TOKEN", action.payload.refreshToken);
+      localStorage.setItem("activeItem", "1");
     },
     setLoading: (state, action) => {
       state.loading = action.payload;
@@ -36,8 +35,6 @@ const authSlice = createSlice({
       state.isAuthenticated = false;
       localStorage.removeItem("user");
       localStorage.removeItem("activeItem");
-      localStorage.removeItem("TOKEN");
-      localStorage.removeItem("REFRESH_TOKEN");
     },
   },
 });
